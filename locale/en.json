@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Session Keep-alive",
+    "description": "Reduce repeated history loading with configurable, persistent retention limits. Defaults: 8 sessions / 30 idle minutes."
+  }
+}

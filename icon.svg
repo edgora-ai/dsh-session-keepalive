@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Session Keep-alive">
+  <rect x="3" y="3" width="58" height="58" rx="16" fill="#167563"/>
+  <path d="M16 19h32v23H29l-10 7v-7h-3z" fill="none" stroke="#fff" stroke-width="3" stroke-linejoin="round"/>
+  <path d="m34 23-8 11h6l-2 9 11-14h-7l3-6z" fill="#a6f0cf"/>
+</svg>

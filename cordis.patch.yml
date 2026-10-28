@@ -1,0 +1,3 @@
+- insert:
+    - id: local-session-keepalive
+      name: '@local/dsh-session-keepalive'

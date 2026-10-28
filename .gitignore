@@ -1,0 +1,16 @@
+# Dependencies and local tooling
+node_modules/
+.DS_Store
+coverage/
+*.log
+*.tgz
+
+# Credentials and local runtime state
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.dsh/
+
+# Keep client.js tracked: it is the distributable DSH Client entry.
