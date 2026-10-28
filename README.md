@@ -4,11 +4,27 @@
 
 在每个浏览器标签页保留已成功打开会话的原生 session retain 引用，减少左右切换时反复释放、重新加载历史。默认最多 **8 个会话（含当前）**，最后一个显示视图离开后闲置 **30 分钟**释放。只保温实际打开过的会话，不预取未打开的会话。
 
-## 安装
+## 下载与安装
 
-本项目通过 GitHub 分发，尚未发布到 npm。`package.json` 的 `private: true` 仅用于防止误发 npm，不影响本仓库按 MIT 开源。
+**[下载插件包 v1.1.2（.tgz）](https://github.com/edgora-ai/dsh-session-keepalive/releases/download/v1.1.2/local-dsh-session-keepalive-1.1.2.tgz)** · [SHA256 校验文件](https://github.com/edgora-ai/dsh-session-keepalive/releases/download/v1.1.2/SHA256SUMS.txt) · [Release 与源码](https://github.com/edgora-ai/dsh-session-keepalive/releases/tag/v1.1.2)
 
-需要 DSH **0.2.1-rc.3 或 0.2.1-rc.4**；其他版本不保证兼容。建议使用 Node.js 22 或更新版本安装依赖和运行测试。
+需要 DSH **0.2.1-rc.3 或 0.2.1-rc.4**；其他版本不保证兼容。插件包已包含构建后的 `client.js`、Host 入口、bundle patch、语言和图标资源，**无需克隆仓库、手动安装依赖或构建**。插件管理器会安装包所声明的依赖，本包没有安装期生命周期脚本，安装时不执行构建。
+
+### 推荐：直接安装预构建包
+
+在命令行使用 DSH 官方的 `dsh plugin add`；将 `web` 换成你的目标 profile 名称：
+
+```sh
+dsh plugin --profile web add 'https://github.com/edgora-ai/dsh-session-keepalive/releases/download/v1.1.2/local-dsh-session-keepalive-1.1.2.tgz'
+```
+
+也可以把同一个下载 URL 粘贴到 DSH **插件**页的安装入口，或让 DSH Agent 用 **Plugin Manager** 的 `install_bundle` 将该 URL 作为 `target` 安装。若已下载 `.tgz` 文件，也可执行 `dsh plugin --profile web add /absolute/path/local-dsh-session-keepalive-1.1.2.tgz`，无需解压。
+
+安装需要 Full access 或相应批准，会影响目标 profile 的所有会话。安装后按管理器返回的应用状态操作，并刷新现有 DSH 网页，在聊天输入区附近找到「会话保温」。不要直接编辑 DSH profile 的 `package.json` 或 patch，也不要在 profile 目录手动安装依赖。
+
+### 从源码开发安装
+
+建议使用 Node.js 22 或更新版本：
 
 ```sh
 git clone https://github.com/edgora-ai/dsh-session-keepalive.git
@@ -18,11 +34,13 @@ npm ci --ignore-scripts
 npm run build
 ```
 
-然后在 DSH 中通过 **Plugin Manager** 的 `install_bundle` 安装这个目录的绝对路径，例如 `link:/absolute/path/dsh-session-keepalive`；也可以直接让 DSH Agent 执行安装。安装需要 Full access 或相应批准，会影响当前 profile 的所有会话。
+然后用 Plugin Manager 安装目录的绝对路径，例如 `link:/absolute/path/dsh-session-keepalive`。本地目录安装会链接此目录，安装后请保留目录。开发时应修改 `src/`，再执行构建，不要直接修改生成文件。
 
-安装后刷新现有 DSH 网页，在聊天输入区附近找到「会话保温」。本地目录安装会链接此目录，安装后请保留目录；不要直接编辑 DSH profile 的 `package.json` 或 patch，也不要在 profile 目录手动安装依赖。
+### 分发与发现
 
-仓库已包含构建后的 `client.js`。GitHub Release 的源码包也可解压后按上述方式安装；开发时应修改 `src/`，再执行构建，不要直接修改生成文件。
+预构建包通过 **GitHub Release 附件**分发，不是 GitHub Packages 或 npm 注册表；`package.json` 的 `private: true` 仅用于防止误发 npm，不影响 MIT 开源或通过 tarball 安装。这与 [DSH 官方打包说明](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/user/develop/basic/publish.zh.md#从-github-安装构建脚本这道坎)中的 tarball 分发方式一致。
+
+仓库已添加官方 [README](https://github.com/deepseek-ai/deepseek-harness/blob/master/README.md#community-and-support) 建议的 **[`dsh-plugin` GitHub Topic](https://github.com/topics/dsh-plugin)**，用于社区发现。它是仓库主题标签，与版本标签 `v1.1.2` 不同，也不代表官方认证或自动收录到用户配置的自定义插件市场。
 
 ## 设置入口
 
